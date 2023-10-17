@@ -1,8 +1,10 @@
-package com.example.aswanna;
+package com.example.aswanna.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.aswanna.R;
 
 public class MainActivity extends AppCompatActivity {
 
