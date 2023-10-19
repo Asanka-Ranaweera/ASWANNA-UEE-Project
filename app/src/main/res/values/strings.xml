@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Aswanna</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Define an array of values for the spinner -->
+    <string-array name="Location_spinner_values">
+        <item>Matale</item>
+        <item>Kandy</item>
+        <item>Colombo</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="Type_spinner_values">
+        <item>paddy</item>
+        <item>tomato</item>
+        <item>Colombo</item>
+        <!-- Add more items as needed -->
+    </string-array>
+
+    <string-array name="level_spinner_values">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <!-- Add more items as needed -->
+    </string-array>
+
+
 </resources>
