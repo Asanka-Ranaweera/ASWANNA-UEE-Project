@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.aswanna.Farmer_Home_Page;
 import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.User;
 import com.example.aswanna.databinding.ActivitySignInBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import io.grpc.internal.Framer;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -23,9 +27,15 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager= new PreferenceManager(getApplicationContext());
         if(preferenceManager.getBoolean(User.KEY_IS_SIGNED_IN)){
-            Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-            finish();
+                if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Farmer")){
+                    Intent intent = new Intent(getApplicationContext(), Farmer_Home_Page.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
         }
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -57,10 +67,17 @@ public class SignInActivity extends AppCompatActivity {
                         preferenceManager.putString(User.KEY_USER_ID,documentSnapshot.getId());
                         preferenceManager.putString(User.KEY_NAME,documentSnapshot.getString(User.KEY_NAME));
                         preferenceManager.putString(User.KEY_IMAGE,documentSnapshot.getString(User.KEY_IMAGE));
+                        preferenceManager.putString(User.KEY_USER_TYPE,documentSnapshot.getString(User.KEY_USER_TYPE));
                         showToast("Have a Nice Day " + preferenceManager.getString(User.KEY_NAME));
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Farmer")){
+                            Intent intent = new Intent(getApplicationContext(), Farmer_Home_Page.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     }else {
                         loading(false);
                         showToast("Unable to Sign In.Please TryAgain");

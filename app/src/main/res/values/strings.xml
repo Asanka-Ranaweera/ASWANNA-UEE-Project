@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Aswanna</string>
 
-    <string-array name="usertype" >
+    <string-array name="usertype">
         <item>Choose Type</item>
-        <item >Investor</item>
+        <item>Investor</item>
         <item>Farmer</item>
 
     </string-array>
