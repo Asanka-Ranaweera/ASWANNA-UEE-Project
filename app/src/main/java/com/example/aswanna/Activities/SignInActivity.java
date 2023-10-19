@@ -7,16 +7,11 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
-
 import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.User;
 import com.example.aswanna.databinding.ActivitySignInBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.regex.Pattern;
-
 
 public class SignInActivity extends AppCompatActivity {
 
