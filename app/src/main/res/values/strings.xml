@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Aswanna</string>
+
+
+    <string-array name="usertype">
+        <item>Choose Type</item>
+        <item>Investor</item>
+        <item>Farmer</item>
+
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -9,5 +18,6 @@
     <string name="type">Select Your Project Type</string>
 
     <string name="time">Select Duration of the Project</string>
+
 
 </resources>
