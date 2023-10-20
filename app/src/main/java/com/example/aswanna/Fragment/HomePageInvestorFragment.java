@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.aswanna.Activities.FilterBottomSheetFragment;
 import com.example.aswanna.Activities.InvestorPostView;
 import com.example.aswanna.Adapters.ProposalAdapter;
 import com.example.aswanna.Model.Proposal;
@@ -74,7 +76,7 @@ public class HomePageInvestorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page_investor, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView); // Replace with your RecyclerView ID
-
+        ImageView filter=view.findViewById(R.id.imageView4);
         // Initialize Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference proposalsRef = db.collection("proposals"); // Replace with the actual Firestore collection name
@@ -122,8 +124,21 @@ public class HomePageInvestorFragment extends Fragment {
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     }
                 });
+
+            }
+
+        });
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFilterBottomSheet();
             }
         });
         return view;
+
     }
+        public void openFilterBottomSheet() {
+            FilterBottomSheetFragment bottomSheetFragment = new FilterBottomSheetFragment();
+            bottomSheetFragment.show(getParentFragmentManager(), bottomSheetFragment.getTag());
+        }
 }

@@ -15,7 +15,7 @@ public class Proposal implements Serializable {
     private String projectLocation;
     private String projectDurationInMonths;
     private String projectDescription;
-    private String fundingRequired;
+    private int fundingRequired;
     private String expectedReturnsOnInvestment;
     private String imageOneLink;
     private String imageTwoLink;
@@ -30,7 +30,7 @@ public class Proposal implements Serializable {
 
     }
 
-    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, String fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
+    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
         this.PID = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;
@@ -105,7 +105,7 @@ public class Proposal implements Serializable {
         return projectDescription;
     }
 
-    public String getFundingRequired() {
+    public int getFundingRequired() {
         return fundingRequired;
     }
 
@@ -149,7 +149,7 @@ public class Proposal implements Serializable {
         this.projectDescription = projectDescription;
     }
 
-    public void setFundingRequired(String fundingRequired) {
+    public void setFundingRequired(int fundingRequired) {
         this.fundingRequired = fundingRequired;
     }
 

@@ -1,5 +1,6 @@
 package com.example.aswanna.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,8 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     @Override
     public void onBindViewHolder(@NonNull ProposalViewHolder holder, int position) {
         Proposal proposal = proposals.get(position);
+        Log.d("Adapter", "Proposal at position " + position + ": " + proposal.getProjectName());
+
         holder.bind(proposal);
     }
 
@@ -81,10 +84,11 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
             } else {
                 // Handle the case where the image URL is null or empty
             }
+
             projectName.setText(proposal.getProjectName());
             pLocation.setText(proposal.getProjectLocation());
             profit.setText(proposal.getExpectedReturnsOnInvestment());
-            pAmount.setText(proposal.getFundingRequired());
+            pAmount.setText(String.valueOf(proposal.getFundingRequired()));
             userName.setText(proposal.getFarmerName());
             userLevel.setText("Level " + proposal.getFarmerLevel());
         }

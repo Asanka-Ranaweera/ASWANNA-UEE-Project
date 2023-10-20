@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Aswanna"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.InvestorMyProjects"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SearchResultInvestor"
             android:exported="false" />
         <activity

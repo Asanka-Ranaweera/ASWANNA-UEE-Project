@@ -56,12 +56,13 @@ public class InvestorPostView extends AppCompatActivity {
         userName.setText(proposal.getFarmerName());
         userLevel.setText(proposal.getFarmerLevel());
         profit.setText(proposal.getExpectedReturnsOnInvestment());
-        pAmount.setText(proposal.getFundingRequired());
+        pAmount.setText(String.valueOf(proposal.getFundingRequired()));
         pLocation.setText(proposal.getProjectLocation());
         ptype.setText(proposal.getProjectType());
         pDuration.setText(proposal.getProjectDurationInMonths());
         pDetails.setText(proposal.getProjectDescription());
         String farmerid=proposal.getFarmerID();
+        String image=proposal.getImageOneLink();
 
         investNow.setOnClickListener(view -> {
             // Create an Inquiry object
@@ -73,6 +74,7 @@ public class InvestorPostView extends AppCompatActivity {
             inquiry.setProjectName(projectName.toString());
             inquiry.setInvestorId(userId.toString());
             inquiry.setStatus(status.toString());
+            inquiry.setImage(image.toString());
 
             inquiry.setProjectName(projectName.getText().toString());
 
