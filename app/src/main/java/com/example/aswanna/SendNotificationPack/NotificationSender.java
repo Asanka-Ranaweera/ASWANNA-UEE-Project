@@ -1,13 +1,5 @@
 package com.example.aswanna.SendNotificationPack;
 
-import android.widget.Toast;
-
-import com.example.aswanna.Activities.MainActivity;
-import com.example.aswanna.Model.InvestorPreference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
-
 public class NotificationSender {
 
     public Data data;

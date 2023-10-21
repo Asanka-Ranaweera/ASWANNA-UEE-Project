@@ -32,7 +32,7 @@ public class Proposal implements Serializable {
 
     }
 
-    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
+    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status,String postedDate) {
         this.pid = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;

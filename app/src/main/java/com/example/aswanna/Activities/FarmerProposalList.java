@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.aswanna.Adapters.ProposalAdapter;
+import com.example.aswanna.Adapters.FarmerProposal;
 import com.example.aswanna.Model.Proposal;
 import com.example.aswanna.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class FarmerProposalList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ProposalAdapter proposalAdapter;
+    private FarmerProposal proposalAdapter;
     private ArrayList<Proposal> proposalList = new ArrayList<>();
 
     @Override
@@ -35,7 +35,7 @@ public class FarmerProposalList extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        proposalAdapter = new ProposalAdapter(proposalList);
+        proposalAdapter = new FarmerProposal(proposalList);
 
 
 

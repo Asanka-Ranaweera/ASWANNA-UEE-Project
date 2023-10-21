@@ -33,7 +33,7 @@ public class SignInActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
-                    Intent intent = new Intent(getApplicationContext(), Profile_View.class);
+                    Intent intent = new Intent(getApplicationContext(), InvestorHome.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -80,7 +80,7 @@ public class SignInActivity extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
-                            Intent intent = new Intent(getApplicationContext(), Profile_View.class);
+                            Intent intent = new Intent(getApplicationContext(), InvestorHome.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }
