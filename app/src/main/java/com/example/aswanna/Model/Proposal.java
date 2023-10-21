@@ -2,7 +2,7 @@ package com.example.aswanna.Model;
 
 public class Proposal {
 
-    private String PID;
+    private String pid;
 
     private String documentID;
     private String farmerID;
@@ -18,15 +18,18 @@ public class Proposal {
     private String imageTwoLink;
 
 
+
     private String Status;
+
+    private String postedDate;
 
     // Constructors
     public Proposal() {
 
     }
 
-    public Proposal(String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, String fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
-        this.PID = PID;
+    public Proposal(String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, String fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status, String postedDate) {
+        this.pid = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;
         this.projectName = projectName;
@@ -39,10 +42,11 @@ public class Proposal {
         this.imageOneLink = imageOneLink;
         this.imageTwoLink = imageTwoLink;
         Status = status;
+        this.postedDate = postedDate;
     }
 
     public String getPID() {
-        return PID;
+        return pid;
     }
 
     public String getDocumentID() {
@@ -91,6 +95,10 @@ public class Proposal {
 
     public String getStatus() {
         return Status;
+    }
+
+    public String getPostedDate() {
+        return postedDate;
     }
 
     // Getters and setters

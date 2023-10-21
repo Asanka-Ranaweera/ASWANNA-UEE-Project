@@ -2,11 +2,13 @@ package com.example.aswanna.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -50,6 +52,12 @@ public class ProductAddThree extends Fragment {
 
         ProposalAdd proposalAdd=(ProposalAdd) getActivity();
 
+        ImageView imageView = proposalAdd.findViewById(R.id.three);
+        Drawable drawable1 = ContextCompat.getDrawable(requireContext(), R.drawable.numthreew);
+        Drawable drawable = ContextCompat.getDrawable(requireContext(), R.drawable.correct);
+
+        imageView.setImageDrawable(drawable1);
+
         Button btn=proposalAdd.findViewById(R.id.nextButton);
 
         selectedImageOne=view.findViewById(R.id.imageone);
@@ -92,12 +100,20 @@ public class ProductAddThree extends Fragment {
                 // Add your code to display a Toast message here.
 
 
+                if (downloadUrl1==null) {
+                    Toast.makeText(requireContext(), "please upload images before go to the next", Toast.LENGTH_SHORT).show();
+                    return; // Prevent navigation
+                }
+
+                if (downloadUrl2==null) {
+                    Toast.makeText(requireContext(), "please upload images before go to the next", Toast.LENGTH_SHORT).show();
+                    return; // Prevent navigation
+                }
 
 
 
 
-
-
+                imageView.setImageDrawable(drawable);
                 ProductAddFour productAddFour = new ProductAddFour();
 
 
@@ -118,7 +134,7 @@ public class ProductAddThree extends Fragment {
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.viewPager,productAddFour,null).addToBackStack(null).commit();
 
-                Toast.makeText(requireContext(), downloadUrl1, Toast.LENGTH_LONG).show();
+
 
 
             }

@@ -12,9 +12,10 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:outlineSpotShadowColor="@color/black"
         android:background="@color/white"
 
-        android:elevation="0dp"
+        android:elevation="10dp"
         android:theme="@style/ToolbarTheme">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,11 +73,11 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:background="@drawable/roundback"
-                android:src="@drawable/backbutton"
-            android:layout_margin="16dp" />
+                android:layout_width="50dp"
+                android:id="@+id/one"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/numonew" />
 
 
 
@@ -97,10 +98,10 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundback"
-                android:src="@drawable/backbutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/two"
+                android:src="@drawable/numtwob"
                 android:layout_margin="16dp" />
 
 
@@ -121,10 +122,10 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundback"
-                android:src="@drawable/backbutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/three"
+                android:src="@drawable/numthreeb"
                 android:layout_margin="16dp" />
 
 
@@ -145,10 +146,10 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundback"
-                android:src="@drawable/backbutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/four"
+                android:src="@drawable/numfourb"
                 android:layout_margin="16dp" />
 
 

@@ -1,13 +1,16 @@
 package com.example.aswanna.Fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +19,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aswanna.Activities.ProposalAdd;
 import com.example.aswanna.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class ProposalAddOne extends Fragment {
 
@@ -52,11 +57,23 @@ public class ProposalAddOne extends Fragment {
 
 
 
+
+
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_proposal_add_one, container, false);
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        String  token = task.getResult();
+                        Log.d("FCM Token", token);
+                    } else {
+                        // Handle the error if token retrieval fails.
+                    }
+                });
 
 
 
@@ -66,7 +83,13 @@ public class ProposalAddOne extends Fragment {
 
         Button btn=proposalAdd.findViewById(R.id.nextButton);
 
+        ImageView imageView = proposalAdd.findViewById(R.id.one);
+        Drawable drawable1 = ContextCompat.getDrawable(requireContext(), R.drawable.numonew); // Replace "your_drawable" with the name of your drawable resource
 
+        Drawable drawable = ContextCompat.getDrawable(requireContext(), R.drawable.correct); // Replace "your_drawable" with the name of your drawable resource
+
+
+        imageView.setImageDrawable(drawable1);
 
 
 
@@ -75,35 +98,6 @@ public class ProposalAddOne extends Fragment {
 
         autoCompleteTextView2.setAdapter(adapterItems2);
 
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Add your code to display a Toast message here.
-
-                pName=projectName.getText().toString();
-
-
-
-
-
-
-                ProposalAddTwo proposalAddTwo = new ProposalAddTwo();
-                Bundle bundle = new Bundle();
-                bundle.putString("pName", pName);
-                bundle.putString("location", locationOne);
-                bundle.putString("type", typeOne);
-                bundle.putString("time", timeOne);
-
-                proposalAddTwo.setArguments(bundle);
-
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.viewPager,proposalAddTwo,null).addToBackStack(null).commit();
-
-
-
-
-            }
-        });
 
         autoCompleteTextView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -178,6 +172,65 @@ public class ProposalAddOne extends Fragment {
 
             }
         });
+
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Add your code to display a Toast message here.
+
+                pName=projectName.getText().toString();
+                autoCompleteTextView2.setError(null); // Removes the error message
+                autoCompleteTextView.setError(null);
+                autoCompleteTextView2.setError(null);
+
+
+                if (pName.isEmpty()) {
+                    projectName.setError("Project name cannot be empty");
+                    return; // Prevent navigation
+                }
+
+                if (locationOne==null) {
+                    autoCompleteTextView.setError("Location cannot be empty");
+                    return; // Prevent navigation
+                }
+
+                if (typeOne==null) {
+                    autoCompleteTextView1.setError("Project Type cannot be empty");
+                    return; // Prevent navigation
+                }
+
+                if (timeOne==null) {
+                    autoCompleteTextView2.setError("Project Duration cannot be empty");
+                    return; // Prevent navigation
+                }
+
+
+
+
+
+
+
+                ProposalAddTwo proposalAddTwo = new ProposalAddTwo();
+                Bundle bundle = new Bundle();
+                bundle.putString("pName", pName);
+                bundle.putString("location", locationOne);
+                bundle.putString("type", typeOne);
+                bundle.putString("time", timeOne);
+
+                proposalAddTwo.setArguments(bundle);
+
+                imageView.setImageDrawable(drawable);
+
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.viewPager,proposalAddTwo,null).addToBackStack(null).commit();
+
+
+
+
+            }
+        });
+
 
 
 

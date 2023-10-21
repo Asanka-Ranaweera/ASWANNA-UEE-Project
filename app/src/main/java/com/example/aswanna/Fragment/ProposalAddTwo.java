@@ -1,15 +1,18 @@
 package com.example.aswanna.Fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +35,22 @@ public class ProposalAddTwo extends Fragment {
 
         ProposalAdd proposalAdd=(ProposalAdd) getActivity();
 
+        ImageView imageView = proposalAdd.findViewById(R.id.two);
+        Drawable drawable1 = ContextCompat.getDrawable(requireContext(), R.drawable.numtwow);
+        Drawable drawable = ContextCompat.getDrawable(requireContext(), R.drawable.correct);
+
+        imageView.setImageDrawable(drawable1);
+
+
         pDescription=view.findViewById(R.id.projectDescription);
         pFund=view.findViewById(R.id.fund);
         pExpected=view.findViewById(R.id.expect);
 
 
         Button btn=proposalAdd.findViewById(R.id.nextButton);
+
+
+
 
 
         Bundle args = getArguments();
@@ -66,9 +79,26 @@ public class ProposalAddTwo extends Fragment {
                String  expected=pExpected.getText().toString();
                String fund=pFund.getText().toString();
 
+                if (description.isEmpty()) {
+                    pDescription.setError("Project Description cannot be empty");
+                    return; // Prevent navigation
+                }
+
+                if (expected.isEmpty()) {
+                    pExpected.setError("Returns on investment cannot be empty");
+                    return; // Prevent navigation
+                }
+
+                if (fund.isEmpty()) {
+                    pFund.setError("Funding Required cannot be empty");
+                    return; // Prevent navigation
+                }
 
 
 
+
+
+                imageView.setImageDrawable(drawable);
 
                 ProductAddThree productAddThree = new ProductAddThree();
                 Bundle bundle = new Bundle();
