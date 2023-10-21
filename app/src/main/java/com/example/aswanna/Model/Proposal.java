@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Proposal implements Serializable {
 
-    private String PID;
+    private String pid;
 
     private String documentID;
     private String farmerID;
@@ -25,13 +25,15 @@ public class Proposal implements Serializable {
     private String farmerLevel;
     private String Status;
 
+    private String postedDate;
+
     // Constructors
     public Proposal() {
 
     }
 
     public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
-        this.PID = PID;
+        this.pid = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;
         this.projectName = projectName;
@@ -47,7 +49,11 @@ public class Proposal implements Serializable {
         this.farmerName=farmerName;
         this.farmerLevel=farmerLevel;
         Status = status;
+        this.postedDate = postedDate;
     }
+
+
+
 
     public void setFarmerLevel(String farmerLevel) {
         this.farmerLevel = farmerLevel;
@@ -74,7 +80,7 @@ public class Proposal implements Serializable {
     }
 
     public String getPID() {
-        return PID;
+        return pid;
     }
 
     public String getDocumentID() {
@@ -118,7 +124,7 @@ public class Proposal implements Serializable {
     }
 
     public void setPID(String PID) {
-        this.PID = PID;
+        this.pid = PID;
     }
 
     public void setDocumentID(String documentID) {
@@ -175,6 +181,10 @@ public class Proposal implements Serializable {
 
     public String getStatus() {
         return Status;
+    }
+
+    public String getPostedDate() {
+        return postedDate;
     }
 
     // Getters and setters
