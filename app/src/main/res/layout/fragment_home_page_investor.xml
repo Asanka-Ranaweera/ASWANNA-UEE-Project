@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="413dp"
+            android:layout_width="wrap_content"
             android:layout_height="140dp"
             android:layout_marginTop="61dp"
             android:layout_marginBottom="1dp"
@@ -55,7 +55,7 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="335dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="73dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
@@ -96,7 +96,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="412dp"
+            android:layout_width="wrap_content"
             android:layout_height="494dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"

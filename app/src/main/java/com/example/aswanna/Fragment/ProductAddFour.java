@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.aswanna.Activities.ProposalAdd;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 import com.example.aswanna.SendNotificationPack.APIService;
 import com.example.aswanna.SendNotificationPack.Client;
@@ -57,9 +59,12 @@ public class ProductAddFour extends Fragment {
     private TextView proposalId,projectName;
 
     private String data1,data2,data3,data4,data5,data6,data7,downloadUrl1,downloadUrl2,PID;
-
+    private int funding;
 
     private APIService apiService;
+
+    private PreferenceManager preferenceManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +82,9 @@ public class ProductAddFour extends Fragment {
 
 
         View view=inflater.inflate(R.layout.fragment_product_add_four, container, false);
+
+        preferenceManager = new PreferenceManager(getContext());
+
 
         apiService=  Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
@@ -113,6 +121,7 @@ public class ProductAddFour extends Fragment {
             data5=args.getString("description");
             data6=args.getString("expected");
             data7=args.getString("fund");
+            funding=Integer.parseInt(data7);
             downloadUrl1=args.getString("imgUrlOne");
             downloadUrl2=args.getString("imgUrlTwo");
 
@@ -144,7 +153,7 @@ public class ProductAddFour extends Fragment {
             @Override
             public void onClick(View v) {
                 // Add your code to display a Toast message here.
-                String farmerId="0002";
+
                 String status="on";
                 String documentId = proposalsCollection.document().getId();
 
@@ -158,7 +167,7 @@ public class ProductAddFour extends Fragment {
 
 
 
-                Proposal proposal = new Proposal(PID,documentId,farmerId,data1,data3,data2,data4,data5,data7,data6,downloadUrl1,downloadUrl2,status,postedDate);
+                Proposal proposal = new Proposal(preferenceManager.getString(User.KEY_LEVEL),preferenceManager.getString(User.KEY_IMAGE),preferenceManager.getString(User.KEY_NAME),PID,documentId,preferenceManager.getString(User.KEY_EMAIL),data1,data3,data2,data4,data5,funding,data6,downloadUrl1,downloadUrl2,status,postedDate);
 
 
                 proposalsCollection.document(documentId).set(proposal)
