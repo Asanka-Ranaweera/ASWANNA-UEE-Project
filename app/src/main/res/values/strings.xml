@@ -13,11 +13,27 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-    <string name="location">Select Your Project Location</string>
+    <!-- Define an array of values for the spinner -->
+    <string-array name="Location_spinner_values">
+        <item>Matale</item>
+        <item>Kandy</item>
+        <item>Colombo</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="Type_spinner_values">
+        <item>paddy</item>
+        <item>tomato</item>
+        <item>Colombo</item>
+        <!-- Add more items as needed -->
+    </string-array>
 
-    <string name="type">Select Your Project Type</string>
+    <string-array name="level_spinner_values">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <!-- Add more items as needed -->
+    </string-array>
 
-    <string name="time">Select Duration of the Project</string>
 
 
 </resources>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="270dp"
+    android:background="#D3D2D2"
+    android:layout_marginBottom="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/pAmount"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="74dp"
+            android:fontFamily="@font/poppins_black"
+            android:text="Rs. 100500.00"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toStartOf="@+id/pProjectImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pProfit" />
+
+        <TextView
+            android:id="@+id/pProfit"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="74dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Profit -40%"
+            android:textColor="#E6AC33"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/pProjectImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pLocation" />
+
+        <TextView
+            android:id="@+id/pLocation"
+            android:layout_width="128dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="74dp"
+            android:fontFamily="@font/regular"
+            android:text="Nuwara Eliya"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/pProjectImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pProjectName" />
+
+        <TextView
+            android:id="@+id/pProjectName"
+            android:layout_width="174dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="28dp"
+            android:fontFamily="@font/poppins_black"
+            android:text="Green Chilly"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toStartOf="@+id/pProjectImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pFarmerLeve" />
+
+        <TextView
+            android:id="@+id/pFarmerLeve"
+            android:layout_width="122dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_black"
+            android:text="Level 4"
+            android:textColor="@color/greenappall"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/pProjectImage"
+            app:layout_constraintStart_toEndOf="@+id/pUserImage"
+            app:layout_constraintTop_toBottomOf="@+id/pUserName" />
+
+        <ImageView
+            android:id="@+id/pUserImage"
+            android:layout_width="86dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/a"
+            app:layout_constraintEnd_toStartOf="@+id/pFarmerLeve"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/pUserName"
+            android:layout_width="127dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="51dp"
+            android:fontFamily="@font/regular"
+            android:text="Saman Silva"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/pPostedDate"
+            app:layout_constraintStart_toEndOf="@+id/pUserImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pPostedDate"
+            android:layout_width="108dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="33dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="21 nov 2023"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/pProjectImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/pProjectImage"
+            android:layout_width="184dp"
+            android:layout_height="185dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="9dp"
+            app:layout_constraintBottom_toTopOf="@+id/pViewButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pUserName"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/pViewButton"
+            android:layout_width="295dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="2dp"
+            android:backgroundTint="@color/greenappall"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="View More"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
