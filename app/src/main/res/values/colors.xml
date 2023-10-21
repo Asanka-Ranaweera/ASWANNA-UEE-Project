@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
+
         <color name="colorPrimary">#3F51B5</color>
         <color name="colorPrimaryDark">#303F9F</color>
         <color name="colorAccent">#FF4081</color>
@@ -13,5 +14,6 @@
         <color name="BtnColour">#228D4C</color>
 
 
+    <color name="colorPrimary">#228D4C</color>
 
 </resources>
