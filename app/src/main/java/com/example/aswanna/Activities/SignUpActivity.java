@@ -91,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
                     preferenceManager.putString(User.KEY_USER_ID,documentReference.getId());
                     preferenceManager.putString(User.KEY_NAME,binding.edtFullName.getText().toString());
                     preferenceManager.putString(User.KEY_IMAGE,encodedImage);
+                    preferenceManager.putString(User.KEY_LEVEL,binding.level.getText().toString());
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     Toast.makeText(getApplicationContext(), "Regitration Successfully", Toast.LENGTH_SHORT).show();
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
