@@ -1,6 +1,9 @@
 package com.example.aswanna.Model;
 
-public class Proposal {
+
+import java.io.Serializable;
+
+public class Proposal implements Serializable {
 
     private String pid;
 
@@ -12,13 +15,14 @@ public class Proposal {
     private String projectLocation;
     private String projectDurationInMonths;
     private String projectDescription;
-    private String fundingRequired;
+    private int fundingRequired;
     private String expectedReturnsOnInvestment;
     private String imageOneLink;
     private String imageTwoLink;
 
-
-
+    private String farmerName;
+    private String farmerProfileImage;
+    private String farmerLevel;
     private String Status;
 
     private String postedDate;
@@ -28,7 +32,7 @@ public class Proposal {
 
     }
 
-    public Proposal(String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, String fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status, String postedDate) {
+    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status) {
         this.pid = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;
@@ -41,8 +45,38 @@ public class Proposal {
         this.expectedReturnsOnInvestment = expectedReturnsOnInvestment;
         this.imageOneLink = imageOneLink;
         this.imageTwoLink = imageTwoLink;
+        this.farmerProfileImage=farmerProfileImage;
+        this.farmerName=farmerName;
+        this.farmerLevel=farmerLevel;
         Status = status;
         this.postedDate = postedDate;
+    }
+
+
+
+
+    public void setFarmerLevel(String farmerLevel) {
+        this.farmerLevel = farmerLevel;
+    }
+
+    public String getFarmerLevel() {
+        return farmerLevel;
+    }
+
+    public void setFarmerName(String farmerName) {
+        this.farmerName = farmerName;
+    }
+
+    public void setFarmerProfileImage(String farmerProfileImage) {
+        this.farmerProfileImage = farmerProfileImage;
+    }
+
+    public String getFarmerName() {
+        return farmerName;
+    }
+
+    public String getFarmerProfileImage() {
+        return farmerProfileImage;
     }
 
     public String getPID() {
@@ -77,7 +111,7 @@ public class Proposal {
         return projectDescription;
     }
 
-    public String getFundingRequired() {
+    public int getFundingRequired() {
         return fundingRequired;
     }
 
@@ -87,6 +121,58 @@ public class Proposal {
 
     public String getImageOneLink() {
         return imageOneLink;
+    }
+
+    public void setPID(String PID) {
+        this.pid = PID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
+    public void setFarmerID(String farmerID) {
+        this.farmerID = farmerID;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public void setProjectLocation(String projectLocation) {
+        this.projectLocation = projectLocation;
+    }
+
+    public void setProjectDurationInMonths(String projectDurationInMonths) {
+        this.projectDurationInMonths = projectDurationInMonths;
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
+    }
+
+    public void setFundingRequired(int fundingRequired) {
+        this.fundingRequired = fundingRequired;
+    }
+
+    public void setExpectedReturnsOnInvestment(String expectedReturnsOnInvestment) {
+        this.expectedReturnsOnInvestment = expectedReturnsOnInvestment;
+    }
+
+    public void setImageOneLink(String imageOneLink) {
+        this.imageOneLink = imageOneLink;
+    }
+
+    public void setImageTwoLink(String imageTwoLink) {
+        this.imageTwoLink = imageTwoLink;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     public String getImageTwoLink() {
@@ -104,4 +190,3 @@ public class Proposal {
     // Getters and setters
 
 }
-

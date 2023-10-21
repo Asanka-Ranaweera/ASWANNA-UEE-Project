@@ -1,8 +1,10 @@
 package com.example.aswanna.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,64 +15,87 @@ import com.bumptech.glide.Glide;
 import com.example.aswanna.Model.Proposal;
 import com.example.aswanna.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ViewHolder> {
+public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ProposalViewHolder> {
+    private List<Proposal> proposals;
+    private OnButtonClickListener buttonClickListener;
 
-    private ArrayList<Proposal> pList;
+    public ProposalAdapter(List<Proposal> proposals, OnButtonClickListener buttonClickListener) {
+        this.proposals = proposals;
+        this.buttonClickListener = buttonClickListener;
+    }
 
     @NonNull
     @Override
-    public ProposalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.proposalcardfarmer,parent,false);
-
-        return new ViewHolder(itemView);
+    public ProposalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card_item, parent, false);
+        return new ProposalViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProposalAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProposalViewHolder holder, int position) {
+        Proposal proposal = proposals.get(position);
+        Log.d("Adapter", "Proposal at position " + position + ": " + proposal.getProjectName());
 
-               Proposal proposal=pList.get(position);
-              holder.proposalID.setText("Proposal ID-" + proposal.getPID());
-
-                holder.proposalType.setText(proposal.getProjectType());
-               holder.postedDate.setText("Posted Date "+proposal.getPostedDate());
-               String imageLink=proposal.getImageOneLink();
-               Glide.with(holder.itemView.getContext()).load(imageLink).into(holder.proposalImage);
-
-
+        holder.bind(proposal);
     }
-
-    public ProposalAdapter(ArrayList<Proposal> pList) {
-        this.pList = pList;
-    }
-
 
     @Override
     public int getItemCount() {
-        return pList.size();
+        return proposals.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ProposalViewHolder extends RecyclerView.ViewHolder {
+        private TextView userName, postDate, userLevel, projectName, pLocation, profit, pAmount;
+        private ImageView proposalImage, profileImage;
+        private Button actionButton; // Add a Button
 
-        TextView proposalID,proposalType,postedDate;
-        ImageView proposalImage,delete,update;
-
-        public ViewHolder(@NonNull View itemView) {
+        public ProposalViewHolder(View itemView) {
             super(itemView);
-            proposalID=itemView.findViewById(R.id.proid);
-            proposalType=itemView.findViewById(R.id.proposalName);
-            postedDate=itemView.findViewById(R.id.date);
-            proposalImage=itemView.findViewById(R.id.proposalimage);
-            delete=itemView.findViewById(R.id.delete);
-            update=itemView.findViewById(R.id.edit);
+            proposalImage = itemView.findViewById(R.id.pProjectImage);
+            profileImage = itemView.findViewById(R.id.pUserImage);
+            userName = itemView.findViewById(R.id.pUserName);
+            postDate = itemView.findViewById(R.id.pPostedDate);
+            userLevel = itemView.findViewById(R.id.pFarmerLeve);
+            projectName = itemView.findViewById(R.id.pProjectName);
+            profit = itemView.findViewById(R.id.pProfit);
+            pAmount = itemView.findViewById(R.id.pAmount);
+            pLocation = itemView.findViewById(R.id.pLocation);
+            actionButton = itemView.findViewById(R.id.pViewButton); // Replace with your Button ID
 
+            // Set an OnClickListener for the button
+            actionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && buttonClickListener != null) {
+                        buttonClickListener.onButtonClick(proposals.get(position));
+                    }
+                }
+            });
+        }
 
+        public void bind(Proposal proposal) {
+            // Load and display images using an image loading library (e.g., Glide or Picasso)
+            if (proposal.getImageOneLink() != null) {
+                Glide.with(itemView.getContext()).load(proposal.getImageOneLink()).into(proposalImage);
+                Glide.with(itemView.getContext()).load(proposal.getImageOneLink()).into(profileImage);
+            } else {
+                // Handle the case where the image URL is null or empty
+            }
 
+            projectName.setText(proposal.getProjectName());
+            pLocation.setText(proposal.getProjectLocation());
+            profit.setText(proposal.getExpectedReturnsOnInvestment());
+            pAmount.setText(String.valueOf(proposal.getFundingRequired()));
+            userName.setText(proposal.getFarmerName());
+            userLevel.setText("Level " + proposal.getFarmerLevel());
         }
     }
 
-
-
+    // Callback interface to handle button clicks
+    public interface OnButtonClickListener {
+        void onButtonClick(Proposal proposal);
+    }
 }
