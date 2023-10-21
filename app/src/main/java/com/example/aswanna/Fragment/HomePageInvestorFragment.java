@@ -88,16 +88,12 @@ public class HomePageInvestorFragment extends Fragment {
                 Proposal proposal = document.toObject(Proposal.class);
                 // Fetch user details based on farmerID from another Firestore collection
                 CollectionReference usersRef = db.collection("users"); // Replace with the actual Firestore collection name
-                usersRef.document(proposal.getFarmerID()).get().addOnSuccessListener(userDoc -> {
+
                     // Assuming "name" and "profileImage" are the field names in the user document
-                    String farmerName = userDoc.getString("name");
-                    String farmerlevl = userDoc.getString("level");
-                    String profileImage=userDoc.getString("image");
+
 
                     // Set the user details in the Proposal object
-                    proposal.setFarmerName(farmerName);
-                    proposal.setFarmerLevel(farmerlevl);
-                    proposal.setFarmerProfileImage(profileImage);
+
 
                     proposals.add(proposal);
 
@@ -111,9 +107,6 @@ public class HomePageInvestorFragment extends Fragment {
                                 Intent intent = new Intent(getActivity(), InvestorPostView.class);
                                 // Pass the proposal data to the new activity
                                 intent.putExtra("proposal",proposal );
-                                intent.putExtra("userName",farmerName );
-                                intent.putExtra("level",farmerlevl );
-                                intent.putExtra("userId",userSession );
 
 
 
@@ -123,7 +116,7 @@ public class HomePageInvestorFragment extends Fragment {
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     }
-                });
+
 
             }
 
