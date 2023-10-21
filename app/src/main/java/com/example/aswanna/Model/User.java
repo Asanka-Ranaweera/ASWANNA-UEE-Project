@@ -1,6 +1,7 @@
 package com.example.aswanna.Model;
 
 public class User {
+
     public static final String KEY_COLLECTION_USERS = "users";
     public static final String KEY_NAME = "name";
     public static final String KEY_USER_TYPE ="usertype";
@@ -15,5 +16,12 @@ public class User {
     public static final String KEY_LEVEL="level";
     public static final String KEY_COUNT="count";
     public static final String KEY_FCM_TOKEN ="fcmToken";
+
+
+
+    public User() {
+      
+    }
+
 
 }
