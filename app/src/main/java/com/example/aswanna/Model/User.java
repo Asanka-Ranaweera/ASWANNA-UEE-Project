@@ -16,6 +16,9 @@ public class User {
     public static final String KEY_LEVEL="level";
     public static final String KEY_COUNT="count";
 
+
     public User() {
+      
     }
+
 }

@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Aswanna</string>
+
+
+    <string-array name="usertype">
+        <item>Choose Type</item>
+        <item>Investor</item>
+        <item>Farmer</item>
+
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -24,6 +33,7 @@
         <item>Level 3</item>
         <!-- Add more items as needed -->
     </string-array>
+
 
 
 </resources>
