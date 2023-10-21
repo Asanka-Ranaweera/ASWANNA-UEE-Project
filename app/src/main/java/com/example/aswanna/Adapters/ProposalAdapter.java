@@ -1,5 +1,8 @@
 package com.example.aswanna.Adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 
 import java.util.List;
@@ -80,7 +84,11 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
             // Load and display images using an image loading library (e.g., Glide or Picasso)
             if (proposal.getImageOneLink() != null) {
                 Glide.with(itemView.getContext()).load(proposal.getImageOneLink()).into(proposalImage);
-                Glide.with(itemView.getContext()).load(proposal.getImageOneLink()).into(profileImage);
+                byte[] bytes = Base64.decode(proposal.getFarmerProfileImage(),Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                profileImage.setImageBitmap(bitmap);
+
+
             } else {
                 // Handle the case where the image URL is null or empty
             }

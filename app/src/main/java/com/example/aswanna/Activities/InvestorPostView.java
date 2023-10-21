@@ -3,10 +3,15 @@ package com.example.aswanna.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.aswanna.Model.Inquiry;
 import com.example.aswanna.Model.Proposal;
 import com.example.aswanna.R;
@@ -20,6 +25,7 @@ public class InvestorPostView extends AppCompatActivity {
             profit, pAmount,ptype,pDuration,pDetails;
     private Button investNow;
 
+    private ImageView Fprofile,Pimage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +33,7 @@ public class InvestorPostView extends AppCompatActivity {
 
         Proposal proposal = (Proposal) getIntent().getSerializableExtra("proposal");
         Intent intent = getIntent();
-        String name = intent.getStringExtra("userName");
-        String level = intent.getStringExtra("level");
-        String userId = intent.getStringExtra("userId");
+
 
 //        proposalImage = findViewById(R.id.pProjectImage);
 //        profileImage = itemView.findViewById(R.id.pUserImage);
@@ -44,9 +48,10 @@ public class InvestorPostView extends AppCompatActivity {
         pDuration=findViewById(R.id.postDuration);
         pDetails=findViewById(R.id.postdetails);
         investNow = findViewById(R.id.button3); // Replace with your Button ID
+        Fprofile=findViewById(R.id.imageView9);
+        Pimage=findViewById(R.id.propsalimage);
     String projectId= proposal.getPID();
     String DocumentID= proposal.getDocumentID();
-    String UserID= userId;
     String status= "pending";
 
 
@@ -64,6 +69,13 @@ public class InvestorPostView extends AppCompatActivity {
         String farmerid=proposal.getFarmerID();
         String image=proposal.getImageOneLink();
 
+        Glide.with(this).load(proposal.getImageOneLink()).into(Pimage);
+        byte[] bytes = Base64.decode(proposal.getFarmerProfileImage(),Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        Fprofile.setImageBitmap(bitmap);
+
+
+
         investNow.setOnClickListener(view -> {
             // Create an Inquiry object
             Inquiry inquiry = new Inquiry();
@@ -72,7 +84,7 @@ public class InvestorPostView extends AppCompatActivity {
             inquiry.setProjectId(projectId.toString());
             inquiry.setProjectId(projectId.toString());
             inquiry.setProjectName(projectName.toString());
-            inquiry.setInvestorId(userId.toString());
+
             inquiry.setStatus(status.toString());
             inquiry.setImage(image.toString());
 
