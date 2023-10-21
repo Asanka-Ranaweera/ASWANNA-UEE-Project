@@ -14,4 +14,6 @@ public class User {
     public static final String KEY_IMAGE ="image";
     public static final String KEY_LEVEL="level";
     public static final String KEY_COUNT="count";
+    public static final String KEY_FCM_TOKEN ="fcmToken";
+
 }

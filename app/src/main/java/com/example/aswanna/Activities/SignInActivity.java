@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.aswanna.Farmer_Home_Page;
 import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.User;
+import com.example.aswanna.Profile_View;
 import com.example.aswanna.databinding.ActivitySignInBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +33,7 @@ public class SignInActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), Profile_View.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -68,13 +69,18 @@ public class SignInActivity extends AppCompatActivity {
                         preferenceManager.putString(User.KEY_NAME,documentSnapshot.getString(User.KEY_NAME));
                         preferenceManager.putString(User.KEY_IMAGE,documentSnapshot.getString(User.KEY_IMAGE));
                         preferenceManager.putString(User.KEY_USER_TYPE,documentSnapshot.getString(User.KEY_USER_TYPE));
+                        preferenceManager.putString(User.KEY_LEVEL,documentSnapshot.getString(User.KEY_LEVEL));
+                        preferenceManager.putString(User.KEY_EMAIL,documentSnapshot.getString(User.KEY_EMAIL));
+                        preferenceManager.putString(User.KEY_COUNT,documentSnapshot.getString(User.KEY_COUNT));
+                        preferenceManager.putString(User.KEY_PHONE_NO,documentSnapshot.getString(User.KEY_PHONE_NO));
+
                         showToast("Have a Nice Day " + preferenceManager.getString(User.KEY_NAME));
                         if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Farmer")){
                             Intent intent = new Intent(getApplicationContext(), Farmer_Home_Page.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), Profile_View.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }
