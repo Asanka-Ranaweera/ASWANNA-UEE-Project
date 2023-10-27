@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.example.aswanna.Activities.FarmerProposalList;
 import com.example.aswanna.Activities.ProposalAdd;
 import com.example.aswanna.Activities.SignInActivity;
 import com.example.aswanna.Activities.SignUpActivity;
@@ -45,7 +46,7 @@ public class Farmer_Home_Page extends AppCompatActivity {
         binding.imageProfile.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), Profile_View.class)));
         binding.fabNewChat.setOnClickListener(v->
-                startActivity(new Intent(getApplicationContext(),userLisst.class)));
+                startActivity(new Intent(getApplicationContext(), FarmerProposalList.class)));
         binding.chatUsers.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), ProposalAdd.class)));
     }

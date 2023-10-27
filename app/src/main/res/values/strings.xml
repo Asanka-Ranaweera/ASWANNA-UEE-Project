@@ -3,6 +3,11 @@
 
     <string name="location">Select Your Project Location</string>
 
+    <string name="location1">Project Location</string>
+
+    <string name="type1">Project Type</string>
+
+
     <string name="type">Select Your Project Type</string>
 
     <string name="time">Select Duration of the Project</string>
@@ -41,5 +46,9 @@
         <!-- Add more items as needed -->
     </string-array>
 
+    <array name="initial_slider_values">
+        <item>2000</item>
+        <item>3500</item>
+    </array>
 
 </resources>
