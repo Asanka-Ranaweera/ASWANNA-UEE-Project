@@ -98,8 +98,8 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
             projectName.setText(proposal.getProjectName());
             pLocation.setText(proposal.getProjectLocation());
-            profit.setText(proposal.getExpectedReturnsOnInvestment());
-            pAmount.setText(String.valueOf(proposal.getFundingRequired()));
+            profit.setText("Profit-"+proposal.getExpectedReturnsOnInvestment()+"%");
+            pAmount.setText("Rs "+String.valueOf(proposal.getFundingRequired())+".00");
             userName.setText(proposal.getFarmerName());
             userLevel.setText("Level " + proposal.getFarmerLevel());
         }

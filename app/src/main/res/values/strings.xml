@@ -42,6 +42,7 @@
         <item>Level 1</item>
         <item>Level 2</item>
         <item>Level 3</item>
+        <item>Level 4</item>
         <!-- Add more items as needed -->
     </string-array>
 
@@ -49,6 +50,5 @@
         <item>2000</item>
         <item>3500</item>
     </array>
-
 
 </resources>

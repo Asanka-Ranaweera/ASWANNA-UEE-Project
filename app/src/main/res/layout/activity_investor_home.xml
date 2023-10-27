@@ -12,25 +12,27 @@
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="com.example.aswanna.Fragment.HomePageInvestorFragment"
-        android:layout_width="415dp"
-        android:layout_height="642dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/fragmentContainerView2"
+            android:name="com.example.aswanna.Fragment.HomePageInvestorFragment"
+            android:layout_width="412dp"
+            android:layout_height="652dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="90dp"
 
+            android:layout_marginTop="1dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -171,6 +173,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/bothome45"
+            android:layout_width="85dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="320dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/boticon" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
