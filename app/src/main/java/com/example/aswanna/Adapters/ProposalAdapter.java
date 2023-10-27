@@ -25,6 +25,9 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     private List<Proposal> proposals;
     private OnButtonClickListener buttonClickListener;
 
+
+
+
     public ProposalAdapter(List<Proposal> proposals, OnButtonClickListener buttonClickListener) {
         this.proposals = proposals;
         this.buttonClickListener = buttonClickListener;

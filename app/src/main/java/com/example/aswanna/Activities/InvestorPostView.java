@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.aswanna.Model.Inquiry;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +28,10 @@ public class InvestorPostView extends AppCompatActivity {
     private Button investNow;
 
     private ImageView Fprofile,Pimage;
+
+
+    private PreferenceManager preferenceManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,8 @@ public class InvestorPostView extends AppCompatActivity {
 
         Proposal proposal = (Proposal) getIntent().getSerializableExtra("proposal");
         Intent intent = getIntent();
+
+        preferenceManager = new PreferenceManager(this);
 
 
 //        proposalImage = findViewById(R.id.pProjectImage);
@@ -57,7 +65,7 @@ public class InvestorPostView extends AppCompatActivity {
 
 
         // Set the text of the TextView to the project name
-        projectName.setText(proposal.getProjectName());
+        projectName.setText(preferenceManager.getString(User.KEY_NAME));
         userName.setText(proposal.getFarmerName());
         userLevel.setText(proposal.getFarmerLevel());
         profit.setText(proposal.getExpectedReturnsOnInvestment());

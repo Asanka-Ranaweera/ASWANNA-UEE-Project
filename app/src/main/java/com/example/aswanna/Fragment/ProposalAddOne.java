@@ -40,8 +40,13 @@ public class ProposalAddOne extends Fragment {
             "24-30 months",
             "30-36 months"
     };
-    String[] type = {"Crop Production", "Livestock Farming", "Organic Farming", "Aquaculture", "Agri-Tourism", "Farm Equipment Purchase", "Farm Expansion", "Agribusiness Plan", "Community Farming", "Sustainable Agriculture", "Rural Development", "Value-Added Agriculture", "Agricultural Research", "Food Security", "Grant Proposals"};
-    String[] sriLankanDistricts = {"Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala", "Ratnapura", "Kegalle"};
+    String[] type = {"Crop Production", "Livestock Farming", "Organic Farming", "Aquaculture", "Agri-Tourism",
+            "Farm Equipment Purchase", "Farm Expansion", "Agribusiness Plan", "Community Farming",
+            "Sustainable Agriculture", "Rural Development", "Value-Added Agriculture",
+            "Agricultural Research", "Food Security", "Grant Proposals"};
+    String[] sriLankanDistricts = {"Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle",
+            "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara",
+            "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala", "Ratnapura", "Kegalle"};
     AutoCompleteTextView autoCompleteTextView,autoCompleteTextView1,autoCompleteTextView2;
 
     String typeOne,locationOne,pName,timeOne;

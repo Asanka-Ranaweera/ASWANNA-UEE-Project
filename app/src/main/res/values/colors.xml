@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="greenappall">#2E976A</color>
+    <color name="red1">#FB4B4B</color>
 
 
 
@@ -16,5 +17,13 @@
         <color name="colorButtonBackground">#FF5722</color>
         <color name="BtnColour">#228D4C</color>
         <color name="green">#228D4C</color>
+    <color name="red">#DA0D0D</color>
+    <color name="chip">#E6E5E5</color>
+    <!-- res/values/colors.xml -->
+
+        <color name="trackBackground">#C0C0C0</color>
+        <color name="trackColor">#FF5733</color>
+
+
 
 </resources>
