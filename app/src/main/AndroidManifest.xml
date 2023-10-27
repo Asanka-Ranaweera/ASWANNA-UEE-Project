@@ -17,9 +17,14 @@
         android:label="ASWANNA"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Aswanna"
         tools:targetApi="31">
+        <activity
+            android:name=".Activities.ChatBotMain"
+            android:exported="false">
 
+        </activity>
 
         <activity
             android:name=".Activities.FarmerProposalList"
@@ -44,22 +49,16 @@
 
             android:name=".Activities.SignInActivity"
 
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
        <service
             android:name=".SendNotificationPack.MyFireBaseMessagingService"
             android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
+            android:exported="false">
+
         </service>
 
          <activity
@@ -67,19 +66,29 @@
             android:exported="false" />
           <activity
             android:name=".Activities.InvestorMyProjects"
-            android:exported="false" />
+              android:exported="false" >
+
+          </activity>
         <activity
             android:name=".Activities.SearchResultInvestor"
-            android:exported="false" />
+            android:exported="false" > <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter></activity>
         <activity
             android:name=".Activities.testaa"
             android:exported="false" />
         <activity
             android:name=".Activities.InvestorPostView"
-            android:exported="false" />
+            android:exported="false" ></activity>
         <activity
             android:name=".Activities.InvestorHome"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
          <activity
 
