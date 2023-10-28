@@ -89,9 +89,9 @@ public class InvestorPostView extends AppCompatActivity {
         investNow = findViewById(R.id.button3); // Replace with your Button ID
         Fprofile=findViewById(R.id.imageView9);
         Pimage=findViewById(R.id.propsalimage);
-    String projectId= proposal.getPID();
-    String DocumentID= proposal.getDocumentID();
-    String status= "pending";
+        String projectId= proposal.getPID();
+        String DocumentID= proposal.getDocumentID();
+        String status= "pending";
 
 
 
@@ -130,13 +130,17 @@ public class InvestorPostView extends AppCompatActivity {
                     inquiry.setFarmerID(proposal.getFarmerID());
                     inquiry.setProjectId(proposal.getPID());
                     inquiry.setProjectName(proposal.getProjectName());
-                    inquiry.setInvestorId("123"); // Replace with the actual investor ID
+                    inquiry.setInvestorId(preferenceManager.getString(User.KEY_USER_ID)); // Replace with the actual investor ID
                     inquiry.setStatus("pending");
+                    String investorId=preferenceManager.getString(User.KEY_USER_ID);
+                    inquiry.setInvestorId(investorId);
                     inquiry.setImage(proposal.getImageOneLink());
 
                     // Initialize Firestore and reference to the "Inquiries" collection
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     CollectionReference inquiriesRef = db.collection("Inquiries");
+                    String documentId = inquiriesRef.document().getId();
+                    inquiry.setDocumentID(documentId);
 
                     // Add the Inquiry object to the "Inquiries" collection
                     inquiriesRef.add(inquiry)
@@ -172,7 +176,7 @@ public class InvestorPostView extends AppCompatActivity {
 
             AlertDialog dialog = builder.create();
             dialog.show();
-        });
+   });
 
-    }
+}
 }

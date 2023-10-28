@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aswanna.Adapters.InvestorOngoingProjectsAdapter;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,6 +32,8 @@ public class InvestorOngoingProjectsFragment extends Fragment {
     private InvestorOngoingProjectsAdapter adapter;
     private List<Proposal> proposals;
 
+    private PreferenceManager preferenceManager;
+
     public InvestorOngoingProjectsFragment() {
         // Required empty public constructor
     }
@@ -38,7 +42,10 @@ public class InvestorOngoingProjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_investor_ongoing_projects, container, false);
 
-        String investorId="123";
+
+        preferenceManager = new PreferenceManager(getContext());
+
+        String investorId=preferenceManager.getString(User.KEY_USER_ID);
 
         // Initialize RecyclerView and adapter
         recyclerView = view.findViewById(R.id.recycleviewOngoingProjects);

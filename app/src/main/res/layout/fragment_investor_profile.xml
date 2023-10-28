@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.InvestorProfile">
 
     <LinearLayout
@@ -15,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_marginTop="16dp"
+
             android:layout_height="wrap_content">
 
             <TextView
@@ -41,18 +43,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="150dp"
+
                     android:layout_height="150dp"
-
-
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="123dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="138dp" />
+                    app:cardCornerRadius="100dp"
+                    android:layout_marginStart="130dp"
+                    android:layout_marginEnd="130dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center"
+                        android:id="@+id/propic"
+                        />
+
+
+                </androidx.cardview.widget.CardView>
+
             </RelativeLayout>
 
         </LinearLayout>
@@ -120,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-
+                android:id="@+id/logout"
                 android:textSize="20sp"
                 android:backgroundTint="@color/green"
                 android:text="Log Out"/>
