@@ -11,15 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aswanna.Model.UserRetrive;
 import com.example.aswanna.databinding.ItemContainerUserBinding;
+import com.example.aswanna.listners.UserListner;
 
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
     private final List<UserRetrive> userRetrive;
+    private final UserListner userListner;
 
-    public UserAdapter(List<UserRetrive> userRetrive) {
+    public UserAdapter(List<UserRetrive> userRetrive, UserListner userListner) {
+
         this.userRetrive = userRetrive;
+        this.userListner=userListner;
     }
 
     @NonNull
@@ -53,6 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding.textName.setText(userRetrive.name);
             binding.textEmail.setText(userRetrive.email);
             binding.imageProf.setImageBitmap(getUserImage(userRetrive.image));
+            binding.getRoot().setOnClickListener(v->userListner.onUserClicked(userRetrive));
         }
     }
     private Bitmap getUserImage(String encodedImage) {

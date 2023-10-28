@@ -439,7 +439,7 @@
                 app:srcCompat="@drawable/home2" />
 
             <ImageView
-                android:id="@+id/imageView17"
+                android:id="@+id/chatFarmerBtn"
                 android:layout_width="42dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="36dp"

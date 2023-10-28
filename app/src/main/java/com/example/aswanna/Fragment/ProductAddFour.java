@@ -182,7 +182,9 @@ public class ProductAddFour extends Fragment {
 
 
 
+
                 Proposal proposal=new Proposal("","","",preferenceManager.getString(User.KEY_LEVEL),preferenceManager.getString(User.KEY_IMAGE),preferenceManager.getString(User.KEY_NAME),PID,documentId,preferenceManager.getString(User.KEY_USER_ID),data1,data3,data2,data4,data5,funding,data6,downloadUrl1,downloadUrl2,status,postedDate);
+
 
                 proposalsCollection.document(documentId).set(proposal)
                         .addOnSuccessListener(aVoid -> {

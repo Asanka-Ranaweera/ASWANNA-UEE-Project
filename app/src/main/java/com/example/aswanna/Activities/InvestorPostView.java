@@ -31,7 +31,7 @@ public class InvestorPostView extends AppCompatActivity {
             profit, pAmount,ptype,pDuration,pDetails;
     private Button investNow;
 
-    private ImageView Fprofile,Pimage;
+    private ImageView Fprofile,Pimage,chatFarmerBtn;
 
 
     private PreferenceManager preferenceManager;
@@ -43,6 +43,7 @@ public class InvestorPostView extends AppCompatActivity {
 
         ImageView back = findViewById(R.id.imageView8);
         ImageView home = findViewById(R.id.imageView16);
+        chatFarmerBtn = findViewById(R.id.imageView17);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +114,19 @@ public class InvestorPostView extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
         Fprofile.setImageBitmap(bitmap);
 
+        chatFarmerBtn.setOnClickListener(view -> {
+            // Create an Intent to start the Chat activity
+            Intent chatIntent = new Intent(InvestorPostView.this, ChatActivity.class);
+
+            // Pass the farmerid as an extra to the Chat activity
+            String farmerid1 = proposal.getFarmerID(); // Assuming you have the farmerid
+            chatIntent.putExtra("farmerid", farmerid1);
+
+            // Start the Chat activity
+            startActivity(chatIntent);
+        });
+
+
 
 
         investNow.setOnClickListener(view -> {
@@ -166,6 +180,10 @@ public class InvestorPostView extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
+
+
+            //chat part
+
 
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override

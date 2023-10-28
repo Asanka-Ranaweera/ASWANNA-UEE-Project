@@ -10,7 +10,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Toast;
 
-import com.example.aswanna.Activities.FarmerProposalList;
+import com.example.aswanna.Activities.Farmer_Request_View;
 import com.example.aswanna.Activities.ProposalAdd;
 import com.example.aswanna.Activities.SignInActivity;
 import com.example.aswanna.Activities.SignUpActivity;
@@ -45,10 +45,20 @@ public class Farmer_Home_Page extends AppCompatActivity {
         binding.imageSignOut.setOnClickListener(v->signOut());
         binding.imageProfile.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), Profile_View.class)));
-        binding.fabNewChat.setOnClickListener(v->
-                startActivity(new Intent(getApplicationContext(), FarmerProposalList.class)));
-        binding.chatUsers.setOnClickListener(v->
+        binding.viewReqBtn.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), Farmer_Request_View.class)));
+
+        //add proposal
+        binding.addIC.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), ProposalAdd.class)));
+        binding.addText.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), ProposalAdd.class)));
+        //chat
+        binding.ChatIC.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), Massage_Main_Activity.class)));
+        binding.chatText.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), Massage_Main_Activity.class)));
+
     }
 
     private void loadUserDetails(){
@@ -67,6 +77,7 @@ public class Farmer_Home_Page extends AppCompatActivity {
     }
 
     private void updateToken(String token){
+        preferenceManager.putString(User.KEY_FCM_TOKEN,token); // for notification
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         DocumentReference documentReference =
                 database.collection(User.KEY_COLLECTION_USERS).document(
