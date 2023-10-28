@@ -97,6 +97,10 @@ public class Inquiry {
         InvestorId = investorId;
         Status = status;
     }
+
+
+
+
 // Additional fields you want to store
 
     // Constructors, getters, and setters

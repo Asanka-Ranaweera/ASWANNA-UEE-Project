@@ -2,22 +2,26 @@ package com.example.aswanna;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.aswanna.Activities.ChatActivity;
+import com.example.aswanna.Activities.ChatActivity_previousOne;
 import com.example.aswanna.Adapters.UserAdapter;
 import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.User;
 import com.example.aswanna.Model.UserRetrive;
 import com.example.aswanna.databinding.ActivityUserLisstBinding;
+import com.example.aswanna.listners.UserListner;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class userLisst extends AppCompatActivity {
+public class userLisst extends AppCompatActivity implements UserListner {
 
     private ActivityUserLisstBinding binding;
     private PreferenceManager preferenceManager;
@@ -42,7 +46,7 @@ public class userLisst extends AppCompatActivity {
         binding.textErrorMessage.setVisibility(View.VISIBLE);
     }
 
-//    private void setListners(){
+    //    private void setListners(){
 //        binding.
 //    }
     private void getUsers(){
@@ -68,15 +72,23 @@ public class userLisst extends AppCompatActivity {
 
                         }
                         if(userRetrives.size()>0){
-                            UserAdapter userAdapter =new UserAdapter(userRetrives);
+                            UserAdapter userAdapter =new UserAdapter(userRetrives, this);
                             binding.usersRecyclerView.setAdapter(userAdapter);
                             binding.usersRecyclerView.setVisibility(View.VISIBLE);
                         }else{
                             showErrorMessage();
                         }
                     }else{
-                            showErrorMessage();
+                        showErrorMessage();
                     }
                 });
+    }
+
+    @Override
+    public void onUserClicked(UserRetrive userRetrive) {
+        Intent intent = new Intent(getApplicationContext(), ChatActivity_previousOne.class);
+        intent.putExtra(User.KEY_USER,userRetrive);
+        startActivity(intent);
+        finish();
     }
 }

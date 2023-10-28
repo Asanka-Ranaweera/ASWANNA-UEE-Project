@@ -11,17 +11,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.aswanna.Activities.FilterBottomSheetFragment;
 import com.example.aswanna.Activities.InvestorPostView;
+import com.example.aswanna.Activities.SignInActivity;
 import com.example.aswanna.Adapters.ProposalAdapter;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,7 +49,12 @@ public class HomePageInvestorFragment extends Fragment {
     private String mParam2;
     private String userSession="123";
 
+    private ImageView signOutBtn;
+    private PreferenceManager preferenceManager;
+
+
     public HomePageInvestorFragment() {
+
         // Required empty public constructor
     }
 
@@ -61,6 +74,7 @@ public class HomePageInvestorFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -77,10 +91,22 @@ public class HomePageInvestorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_page_investor, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView); // Replace with your RecyclerView ID
         ImageView filter=view.findViewById(R.id.imageView4);
+
+        signOutBtn = view.findViewById(R.id.signOutBtn);
+
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
         // Initialize Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference proposalsRef = db.collection("proposals"); // Replace with the actual Firestore collection name
 
+        preferenceManager = new PreferenceManager(requireContext());
+        getToken();
         // Query Firestore for proposals
         proposalsRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Proposal> proposals = new ArrayList<>();
@@ -134,4 +160,49 @@ public class HomePageInvestorFragment extends Fragment {
             FilterBottomSheetFragment bottomSheetFragment = new FilterBottomSheetFragment();
             bottomSheetFragment.show(getParentFragmentManager(), bottomSheetFragment.getTag());
         }
+    private void showToast(String message) {
+        if (getContext() != null) {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+
+    private void updateToken(String token){
+        preferenceManager.putString(User.KEY_FCM_TOKEN,token); // for notification
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(User.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(User.KEY_USER_ID)
+                );
+        documentReference.update(User.KEY_FCM_TOKEN,token)
+//                .addOnSuccessListener(unused -> showToast("Token updated successfully"))
+                .addOnFailureListener(e -> showToast("Unable to Update Token"));
+    }
+
+
+
+    private void signOut(){
+        showToast("SignOut..");
+        FirebaseFirestore database =FirebaseFirestore.getInstance();
+        DocumentReference documentReference=
+                database.collection(User.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(User.KEY_USER_ID)
+                );
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put(User.KEY_FCM_TOKEN, FieldValue.delete());
+        documentReference.update(updates)
+                .addOnSuccessListener(unused -> {
+                    preferenceManager.clear();
+                    startActivity(new Intent(requireContext(), SignInActivity.class));
+
+                })
+                .addOnFailureListener(e -> showToast("Unable to SignOut"));
+
+
+    }
 }

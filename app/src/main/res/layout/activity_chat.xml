@@ -19,6 +19,14 @@
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="97dp" />
 
+    <View
+        android:id="@+id/headerbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/white_background_top"
+        app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageInfo"
         android:layout_width="@dimen/_30sdp"
@@ -33,22 +41,33 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-
     <TextView
         android:id="@+id/textName"
-        android:layout_width="235dp"
-        android:layout_height="31dp"
+        android:layout_width="232dp"
+        android:layout_height="42dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="aaaaaaaaaaaaaaaaaaaaa"
-        android:textColor="@color/black"
+        android:textColor="@color/BtnColour"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageInfo"
         app:layout_constraintEnd_toStartOf="@+id/imageInfo"
+        app:layout_constraintHorizontal_bias="0.741"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageInfo" />
+        app:layout_constraintTop_toTopOf="@+id/imageInfo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/viewSupporter"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@id/inputImage"/>
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecycler"
@@ -57,12 +76,13 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:padding="@dimen/_20sdp"
-        android:visibility="gone"
+        android:padding="@dimen/_8sdp"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@+id/viewBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textName" />
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter"
+        app:stackFromEnd="true" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -118,5 +138,30 @@
         app:layout_constraintEnd_toStartOf="@+id/layoutSend"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/inputImage"
+        android:layout_width="@dimen/_38sdp"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:background="@drawable/background_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@+id/textName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true"/>
+
+    <TextView
+        android:id="@+id/textAvailability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/BtnColour"
+        android:padding="@dimen/_2sdp"
+        android:text="Online"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

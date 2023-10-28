@@ -27,17 +27,17 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceManager= new PreferenceManager(getApplicationContext());
-        if(preferenceManager.getBoolean(User.KEY_IS_SIGNED_IN)){
-                if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Farmer")){
-                    Intent intent = new Intent(getApplicationContext(), Farmer_Home_Page.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
-                    Intent intent = new Intent(getApplicationContext(), InvestorHome.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-        }
+//        if(preferenceManager.getBoolean(User.KEY_IS_SIGNED_IN)){
+//                if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Farmer")){
+//                    Intent intent = new Intent(getApplicationContext(), Farmer_Home_Page.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
+//                }else if(preferenceManager.getString(User.KEY_USER_TYPE).equals("Investor")){
+//                    Intent intent = new Intent(getApplicationContext(), InvestorHome.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
+//                }
+//        }
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListners();

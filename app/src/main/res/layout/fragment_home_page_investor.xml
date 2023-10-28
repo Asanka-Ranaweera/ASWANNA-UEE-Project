@@ -29,7 +29,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/signOutBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="346dp"
@@ -49,7 +49,7 @@
                     android:layout_marginBottom="7dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/signOutBtn"
                     app:srcCompat="@drawable/slider" />
 
 
@@ -60,7 +60,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                    app:layout_constraintEnd_toStartOf="@+id/signOutBtn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/logo" />
