@@ -25,6 +25,9 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     private List<Proposal> proposals;
     private OnButtonClickListener buttonClickListener;
 
+
+
+
     public ProposalAdapter(List<Proposal> proposals, OnButtonClickListener buttonClickListener) {
         this.proposals = proposals;
         this.buttonClickListener = buttonClickListener;
@@ -51,13 +54,14 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     }
 
     public class ProposalViewHolder extends RecyclerView.ViewHolder {
-        private TextView userName, postDate, userLevel, projectName, pLocation, profit, pAmount;
+        private TextView userName, postDate, userLevel, projectName, pLocation, profit, pAmount,postedDate;
         private ImageView proposalImage, profileImage;
         private Button actionButton; // Add a Button
 
         public ProposalViewHolder(View itemView) {
             super(itemView);
             proposalImage = itemView.findViewById(R.id.pProjectImage);
+            postDate = itemView.findViewById(R.id.pPostedDate);
             profileImage = itemView.findViewById(R.id.pUserImage);
             userName = itemView.findViewById(R.id.pUserName);
             postDate = itemView.findViewById(R.id.pPostedDate);
@@ -94,9 +98,10 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
             }
 
             projectName.setText(proposal.getProjectName());
+            postDate.setText(proposal.getPostedDate());
             pLocation.setText(proposal.getProjectLocation());
-            profit.setText(proposal.getExpectedReturnsOnInvestment());
-            pAmount.setText(String.valueOf(proposal.getFundingRequired()));
+            profit.setText("Profit-"+proposal.getExpectedReturnsOnInvestment()+"%");
+            pAmount.setText("Rs "+String.valueOf(proposal.getFundingRequired())+".00");
             userName.setText(proposal.getFarmerName());
             userLevel.setText("Level " + proposal.getFarmerLevel());
         }

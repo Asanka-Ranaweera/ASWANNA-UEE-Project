@@ -19,6 +19,17 @@ public class FarmerProposal extends RecyclerView.Adapter<FarmerProposal.ViewHold
 
     private ArrayList<Proposal> pList;
 
+
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onDeleteButtonClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
+
     @NonNull
     @Override
     public FarmerProposal.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +49,16 @@ public class FarmerProposal extends RecyclerView.Adapter<FarmerProposal.ViewHold
         holder.postedDate.setText("Posted Date "+proposal.getPostedDate());
         String imageLink=proposal.getImageOneLink();
         Glide.with(holder.itemView.getContext()).load(imageLink).into(holder.proposalImage);
+
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onDeleteButtonClick(position);
+                }
+            }
+        });
 
 
     }
@@ -65,6 +86,8 @@ public class FarmerProposal extends RecyclerView.Adapter<FarmerProposal.ViewHold
             proposalImage=itemView.findViewById(R.id.proposalimage);
             delete=itemView.findViewById(R.id.delete);
             update=itemView.findViewById(R.id.edit);
+
+
 
 
 
