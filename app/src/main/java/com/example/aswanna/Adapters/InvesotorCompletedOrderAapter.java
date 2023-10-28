@@ -36,6 +36,8 @@ public class InvesotorCompletedOrderAapter extends RecyclerView.Adapter<Invesoto
     private List<Proposal> proposals;
     private OnButtonClickListener buttonClickListener;
 
+
+
     public InvesotorCompletedOrderAapter(List<Proposal> proposals, OnButtonClickListener buttonClickListener) {
         this.proposals = proposals;
         this.buttonClickListener = buttonClickListener;

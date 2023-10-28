@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.aswanna.Adapters.InvesotorCompletedOrderAapter;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -24,6 +26,9 @@ public class InvestorCompletedProjectsFragment extends Fragment {
     private InvesotorCompletedOrderAapter adapter;
     private List<Proposal> proposals;
 
+    private PreferenceManager preferenceManager;
+
+
     public InvestorCompletedProjectsFragment() {
         // Required empty public constructor
     }
@@ -32,7 +37,9 @@ public class InvestorCompletedProjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_investor_completed_projects, container, false);
 
-        String investorId = "123";
+        preferenceManager = new PreferenceManager(getContext());
+
+        String investorId=preferenceManager.getString(User.KEY_USER_ID);
 
         recyclerView = view.findViewById(R.id.completedProjectsInvestor);
         proposals = new ArrayList<>();

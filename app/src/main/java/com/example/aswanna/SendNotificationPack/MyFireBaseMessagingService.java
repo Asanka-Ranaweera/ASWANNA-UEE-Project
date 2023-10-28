@@ -7,12 +7,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.aswanna.Activities.InvestorPostView;
@@ -22,6 +25,8 @@ import com.example.aswanna.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.Random;
 
 public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
@@ -52,6 +57,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
 
     }
+
 
     private  void NormalNotification(){
 

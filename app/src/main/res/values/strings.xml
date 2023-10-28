@@ -26,15 +26,49 @@
 
     <!-- Define an array of values for the spinner -->
     <string-array name="Location_spinner_values">
-        <item>Matale</item>
-        <item>Kandy</item>
         <item>Colombo</item>
+        <item>Gampaha</item>
+        <item>Kalutara</item>
+        <item>Kandy</item>
+        <item>Matale</item>
+        <item>Nuwara Eliya</item>
+        <item>Galle</item>
+        <item>Matara</item>
+        <item>Hambantota</item>
+        <item>Jaffna</item>
+        <item>Kilinochchi</item>
+        <item>Mannar</item>
+        <item>Vavuniya</item>
+        <item>Mullaitivu</item>
+        <item>Batticaloa</item>
+        <item>Ampara</item>
+        <item>Trincomalee</item>
+        <item>Kurunegala</item>
+        <item>Puttalam</item>
+        <item>Anuradhapura</item>
+        <item>Polonnaruwa</item>
+        <item>Badulla</item>
+        <item>Monaragala</item>
+        <item>Ratnapura</item>
+        <item>Kegalle</item>
         <!-- Add more items as needed -->
     </string-array>
     <string-array name="Type_spinner_values">
-        <item>paddy</item>
-        <item>tomato</item>
-        <item>Colombo</item>
+        <item>Crop Production</item>
+        <item>Livestock Farming</item>
+        <item>Organic Farming</item>
+        <item>Aquaculture</item>
+        <item>Agri-Tourism</item>
+        <item>Farm Equipment Purchase</item>
+        <item>Farm Expansion</item>
+        <item>Agribusiness Plan</item>
+        <item>Community Farming</item>
+        <item>Sustainable Agriculture</item>
+        <item>Rural Development</item>
+        <item>Value-Added Agriculture</item>
+        <item>Agricultural Research</item>
+        <item>Food Security</item>
+        <item>Grant Proposals</item>
         <!-- Add more items as needed -->
     </string-array>
 

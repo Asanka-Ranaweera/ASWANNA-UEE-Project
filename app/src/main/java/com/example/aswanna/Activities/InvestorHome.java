@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.aswanna.Fragment.HomePageInvestorFragment;
 import com.example.aswanna.Fragment.InvestorOngoingProjectsFragment;
+import com.example.aswanna.Fragment.InvestorProfile;
 import com.example.aswanna.R;
 
 public class InvestorHome extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class InvestorHome extends AppCompatActivity {
 
         ImageView projects = findViewById(R.id.imageView12);
         ImageView bothome = findViewById(R.id.bothome45);
+        ImageView menue=findViewById(R.id.imageView11);
         bothome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +58,14 @@ public class InvestorHome extends AppCompatActivity {
             public void onClick(View v) {
                 // Replace the current fragment with NewFragment
                 replaceFragment(new HomePageInvestorFragment());
+            }
+        });
+
+        menue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Replace the current fragment with NewFragment
+                replaceFragment(new InvestorProfile());
             }
         });
     }
