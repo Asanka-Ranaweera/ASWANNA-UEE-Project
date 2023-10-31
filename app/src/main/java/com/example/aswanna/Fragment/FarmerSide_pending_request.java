@@ -58,6 +58,8 @@ public class FarmerSide_pending_request extends Fragment {
         preferenceManager =new PreferenceManager(getContext());
         farmerID=preferenceManager.getString(User.KEY_USER_ID);
 
+
+
         recyclerView = view.findViewById(R.id.pendingRecycler);
         inquiries = new ArrayList<>();
 
