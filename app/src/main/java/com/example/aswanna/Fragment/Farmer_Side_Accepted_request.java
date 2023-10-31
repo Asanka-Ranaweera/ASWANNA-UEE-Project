@@ -3,64 +3,95 @@ package com.example.aswanna.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.aswanna.Adapters.acceptedAdapter;
+import com.example.aswanna.Model.Inquiry;
+import com.example.aswanna.Model.PreferenceManager;
+import com.example.aswanna.Model.User;
 import com.example.aswanna.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Farmer_Side_Accepted_request#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Farmer_Side_Accepted_request extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private RecyclerView recyclerView;
+    private acceptedAdapter adapter;
+    private List<Inquiry> inquiries;
+    PreferenceManager preferenceManager;
+    String farmerID ;
     public Farmer_Side_Accepted_request() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Farmer_Side_Accepted_request.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Farmer_Side_Accepted_request newInstance(String param1, String param2) {
-        Farmer_Side_Accepted_request fragment = new Farmer_Side_Accepted_request();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_farmer__side__accepted_request, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_farmer__side__accepted_request, container, false);
+
+        preferenceManager =new PreferenceManager(getContext());
+        farmerID=preferenceManager.getString(User.KEY_USER_ID);
+
+        recyclerView = view.findViewById(R.id.acceptR);
+        inquiries = new ArrayList<>();
+        adapter = new acceptedAdapter(inquiries, new acceptedAdapter.OnButtonClickListener() {
+            @Override
+            public void onButtonClick(Inquiry inquiry) {
+                // Handle button click actions if needed
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference proposalsRef = db.collection("Inquiries");
+
+        Query query = proposalsRef
+                .whereEqualTo("farmerID", farmerID)
+                .whereEqualTo("status", "accepted");
+
+
+
+
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (Inquiry inquiry : queryDocumentSnapshots.toObjects(Inquiry.class)) {
+                    inquiries.add(inquiry);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("FirestoreError", "Error fetching data: " + e.getMessage());
+        });
+
+        return view;
+
+
+
     }
 }
