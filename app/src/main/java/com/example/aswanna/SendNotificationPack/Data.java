@@ -5,9 +5,19 @@ public class Data {
     public String projectName;
     public String projectType;
 
-    public Data(String projectName, String projectType) {
+    public  String imageUrl;
+
+    public  String location;
+
+    public String price;
+
+
+    public Data(String projectName, String projectType, String imageUrl, String location, String price) {
         this.projectName = projectName;
         this.projectType = projectType;
+        this.imageUrl = imageUrl;
+        this.location = location;
+        this.price = price;
     }
 
     public Data() {
@@ -21,11 +31,15 @@ public class Data {
         return projectType;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setProjectType(String projectType) {
-        this.projectType = projectType;
+    public String getLocation() {
+        return location;
+    }
+
+    public String getPrice() {
+        return price;
     }
 }

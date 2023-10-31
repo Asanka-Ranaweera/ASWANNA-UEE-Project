@@ -6,6 +6,9 @@ import java.io.Serializable;
 public class Proposal implements Serializable {
 
     private String pid;
+    private String investorID;
+    private String startDate;
+    private String endDate;
 
     private String documentID;
     private String farmerID;
@@ -32,7 +35,7 @@ public class Proposal implements Serializable {
 
     }
 
-    public Proposal(String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status,String postedDate) {
+    public Proposal(String investorID,String startDate,String endDate,String farmerLevel,String farmerProfileImage,String farmerName,String PID, String documentID, String farmerID, String projectName, String projectType, String projectLocation, String projectDurationInMonths, String projectDescription, int fundingRequired, String expectedReturnsOnInvestment, String imageOneLink, String imageTwoLink, String status,String postedDate) {
         this.pid = PID;
         this.documentID = documentID;
         this.farmerID = farmerID;
@@ -48,12 +51,40 @@ public class Proposal implements Serializable {
         this.farmerProfileImage=farmerProfileImage;
         this.farmerName=farmerName;
         this.farmerLevel=farmerLevel;
+        this.investorID=investorID;
+        this.startDate=startDate;
+        this.endDate=endDate;
         Status = status;
         this.postedDate = postedDate;
     }
 
+    public void setInvestorID(String investorID) {
+        this.investorID = investorID;
+    }
 
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
 
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPostedDate(String postedDate) {
+        this.postedDate = postedDate;
+    }
+
+    public String getInvestorID() {
+        return investorID;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
 
     public void setFarmerLevel(String farmerLevel) {
         this.farmerLevel = farmerLevel;

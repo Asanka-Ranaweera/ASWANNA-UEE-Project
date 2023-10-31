@@ -1,5 +1,7 @@
 package com.example.aswanna.Fragment;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.aswanna.Activities.NotificationManagement;
 import com.example.aswanna.Activities.ProposalAdd;
 import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
@@ -31,6 +34,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +69,8 @@ public class ProductAddFour extends Fragment {
     private APIService apiService;
 
     private PreferenceManager preferenceManager;
+
+    private List<String> userTokens = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,7 +136,7 @@ public class ProductAddFour extends Fragment {
 
 
           projectName.setText(data1);
-       proposalId.setText("Proposal ID-"+PID);
+          proposalId.setText("Proposal ID-"+PID);
 
 
          // Change the path to your image
@@ -154,6 +161,14 @@ public class ProductAddFour extends Fragment {
             public void onClick(View v) {
                 // Add your code to display a Toast message here.
 
+
+
+
+
+
+
+                sendNotificationToAllUsers(userTokens);
+
                 String status="on";
                 String documentId = proposalsCollection.document().getId();
 
@@ -167,7 +182,8 @@ public class ProductAddFour extends Fragment {
 
 
 
-                Proposal proposal = new Proposal(preferenceManager.getString(User.KEY_LEVEL),preferenceManager.getString(User.KEY_IMAGE),preferenceManager.getString(User.KEY_NAME),PID,documentId,preferenceManager.getString(User.KEY_USER_ID),data1,data3,data2,data4,data5,funding,data6,downloadUrl1,downloadUrl2,status,postedDate);
+
+                Proposal proposal=new Proposal("","","",preferenceManager.getString(User.KEY_LEVEL),preferenceManager.getString(User.KEY_IMAGE),preferenceManager.getString(User.KEY_NAME),PID,documentId,preferenceManager.getString(User.KEY_USER_ID),data1,data3,data2,data4,data5,funding,data6,downloadUrl1,downloadUrl2,status,postedDate);
 
 
                 proposalsCollection.document(documentId).set(proposal)
@@ -178,7 +194,7 @@ public class ProductAddFour extends Fragment {
                             ProductAddFive productAddFive = new ProductAddFive();
 
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.viewPager,productAddFive,null).addToBackStack(null).commit();
-                            getUsersTokensFromFirestore(data1,data2);
+
 
                         })
                         .addOnFailureListener(e -> {
@@ -214,6 +230,14 @@ public class ProductAddFour extends Fragment {
 
 
 
+        checkAllMatchingUsers();
+
+
+
+
+
+
+
 
 
         return view;
@@ -221,17 +245,18 @@ public class ProductAddFour extends Fragment {
 
 
 
-    private void sendNotificationToAllUsers(String proposalName, String proposalPrice, List<String> userTokens) {
+    private void sendNotificationToAllUsers(List<String> userTokens) {
 
 
         for (String userToken : userTokens) {
-            sendNotifications(userToken, proposalName, proposalPrice);
+            Toast.makeText(getContext(), userToken, Toast.LENGTH_SHORT).show();
+            sendNotifications(userToken,data1,data3);
         }
     }
 
 
    public void sendNotifications(String userToken,String proposalName,String proposalType){
-       Data data=new Data(proposalName,proposalType);
+       Data data=new Data(proposalName,proposalType,downloadUrl1,data2,data7);
 
 
 
@@ -260,6 +285,8 @@ public class ProductAddFour extends Fragment {
            @Override
            public void onFailure(Call<MyResponse> call, Throwable t) {
 
+
+
            }
        });
 
@@ -268,26 +295,250 @@ public class ProductAddFour extends Fragment {
 
 
 
-    private void getUsersTokensFromFirestore(String proposalName, String proposalPrice) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        List<String> userTokens = new ArrayList<>();
 
-        db.collection("investorPreference")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String userToken = document.getString("fcmToken");
-                            if (userToken != null) {
-                                userTokens.add(userToken);
-                            }
+    private void checkAllMatchingUsers() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference investorPreferencesCollection = db.collection("InvestorPreferences");
+
+        investorPreferencesCollection.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String userId = document.getId();
+
+                        // Retrieve the FCM token for the user
+                        String fcmToken = document.getString("fcmToken");
+                        if (fcmToken != null) {
+
+                            retrieveSwitchStateFromFirestore(userId,fcmToken);
                         }
-                        sendNotificationToAllUsers(proposalName, proposalPrice, userTokens);
-                    } else {
-                        // Handle the error if the query fails
+
+                        // Continue with other operations if needed.
                     }
+
+
+
+
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error when retrieving user preferences
+                    Toast.makeText(getContext(), "Error while checking matching preferences", Toast.LENGTH_SHORT).show();
                 });
     }
 
 
-}
+
+
+
+    private void retrieveSwitchStateFromFirestore(String currentUser,String Fcm) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (currentUser != null) {
+            CollectionReference userSwitchCollection = db.collection("InvestorPreferences")
+                    .document(currentUser)
+                    .collection("switchState");
+
+            userSwitchCollection.limit(1)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // User switch state document exists, retrieve the switch state
+                            DocumentSnapshot userSwitchDocument = queryDocumentSnapshots.getDocuments().get(0);
+                            Boolean switchState = userSwitchDocument.getBoolean("switchState");
+
+                            // Set the retrieved switch state to the SwitchCompat
+
+                            if (switchState) {
+                                retrieveUserLocations(currentUser,Fcm);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle the error when retrieving the user switch state document
+                        Toast.makeText(getContext(), "Error while retrieving user switch state", Toast.LENGTH_SHORT).show();
+                    });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    private void retrieveUserLocations(String userId,String Fcm) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference userLocationsCollection = db.collection("InvestorPreferences").document(userId).collection("locations");
+        ArrayList<String> userSelectedItems = new ArrayList<>();
+
+        userLocationsCollection.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        if (document.contains("locations")) {
+                            ArrayList<String> locations = (ArrayList<String>) document.get("locations");
+                            if (locations != null) {
+                                userSelectedItems.addAll(locations);
+
+                                retrieveUserTypes(userId,userSelectedItems,Fcm);
+
+                            }
+                        }
+                    }
+
+
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error when retrieving user locations or types
+                    Toast.makeText(getContext(), "Error while retrieving user locations", Toast.LENGTH_SHORT).show();
+                });
+
+
+
+
+    }
+
+
+    private void retrieveUserTypes(String userId, ArrayList<String> locationList,String Fcm) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference userLocationsCollection = db.collection("InvestorPreferences").document(userId).collection("types");
+        ArrayList<String> userSelectedItems = new ArrayList<>();
+
+        userLocationsCollection.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        if (document.contains("types")) {
+                            ArrayList<String> locations = (ArrayList<String>) document.get("types");
+                            if (locations != null) {
+                                userSelectedItems.addAll(locations);
+
+
+                                retrieveUserRange(userId,locationList,userSelectedItems,Fcm);
+
+
+                            }
+                        }
+                    }
+
+
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error when retrieving user locations or types
+                    Toast.makeText(getContext(), "Error while retrieving user locations", Toast.LENGTH_SHORT).show();
+                });
+
+
+
+
+    }
+
+
+
+    private void checkMatching(
+            String inputLocation,
+            String inputType,
+            int fund,
+            ArrayList<String> userSelectedLocations,
+            ArrayList<String> userSelectedTypes,
+            int minRange,
+            int maxRange,
+            String Fcm
+
+    ) {
+
+        boolean isMatchingLocation = userSelectedLocations.contains(inputLocation);
+        boolean isMatchingType = userSelectedTypes.contains(inputType);
+        boolean isMatchingFund = (minRange<=fund) && (maxRange>=fund);
+
+        Log.d(TAG, "checkMatching: "+minRange);
+        Log.d(TAG, "checkMatching: "+maxRange);
+        Log.d(TAG, "checkMatching: "+fund);
+        if (isMatchingType && isMatchingLocation && isMatchingFund) {
+
+            // Toast.makeText(this, Fcm, Toast.LENGTH_SHORT).show();
+
+            userTokens.add(Fcm);
+
+        }
+
+    }
+        private void retrieveUserRange(String userId, ArrayList<String> locationList, ArrayList<String> userSelectedTypes,String Fcm ) {
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            if (userId != null) {
+                CollectionReference userRangeCollection = db.collection("InvestorPreferences")
+                        .document(userId)
+                        .collection("range");
+
+                userRangeCollection
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                // User range document exists, retrieve the range values
+                                DocumentSnapshot userRangeDocument = queryDocumentSnapshots.getDocuments().get(0);
+                                if (userRangeDocument.contains("minRange") && userRangeDocument.contains("maxRange")) {
+                                    int minRange = userRangeDocument.getLong("minRange").intValue();
+                                    int maxRange = userRangeDocument.getLong("maxRange").intValue();
+
+                                    checkMatching(data2,data3,funding,locationList,userSelectedTypes,minRange,maxRange,Fcm);
+
+
+                                }
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            // Handle the error when retrieving user range
+                            Toast.makeText(getContext(), "Error while retrieving user range", Toast.LENGTH_SHORT).show();
+                        });
+            }
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Call this function to check for matching preferences with switch state as true
+
+
+
+
+
+
+
+
+
+
+
+

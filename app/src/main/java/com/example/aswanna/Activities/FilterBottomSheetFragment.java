@@ -21,7 +21,14 @@ public class FilterBottomSheetFragment extends BottomSheetDialogFragment {
     private EditText editText1;
     private EditText editText2;
     private Button show;
-
+    // Add this newInstance method to pass the search query
+    public static FilterBottomSheetFragment newInstance(String searchQuery) {
+        FilterBottomSheetFragment fragment = new FilterBottomSheetFragment();
+        Bundle args = new Bundle();
+        args.putString("searchQuery", searchQuery);
+        fragment.setArguments(args);
+        return fragment;
+    }
     public FilterBottomSheetFragment() {
         // Required empty public constructor
     }
@@ -55,10 +62,14 @@ public class FilterBottomSheetFragment extends BottomSheetDialogFragment {
                 filterData.setSpinner3Value(spinner3Value);
                 filterData.setEditText1Value(editText1Value);
                 filterData.setEditText2Value(editText2Value);
+                // Retrieve the search query from the arguments
+                String searchQuery = getArguments().getString("searchQuery");
 
                 // Pass the data to the next activity via Intent
                 Intent intent = new Intent(getActivity(), SearchResultInvestor.class);
                 intent.putExtra("filterData", filterData);
+                intent.putExtra("searchQuery", searchQuery); // Pass the search query
+
                 startActivity(intent);
             }
         });
