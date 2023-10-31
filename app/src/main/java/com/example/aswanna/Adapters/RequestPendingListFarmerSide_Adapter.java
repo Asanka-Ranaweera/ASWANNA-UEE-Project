@@ -154,7 +154,7 @@ public class RequestPendingListFarmerSide_Adapter extends RecyclerView.Adapter<R
             }
             projectName.setText(inquiry.getProjectName());
             projectID.setText(inquiry.getProjectId());
-//            investorName.setText(proposal.getInvestorID());
+            investorName.setText(inquiry.getFarmerName());
 
         }
     }

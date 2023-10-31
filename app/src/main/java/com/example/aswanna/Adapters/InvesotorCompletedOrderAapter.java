@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.aswanna.Activities.InvestorHome;
 import com.example.aswanna.Activities.InvestorMyProjects;
+import com.example.aswanna.Model.PreferenceManager;
 import com.example.aswanna.Model.Proposal;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class InvesotorCompletedOrderAapter extends RecyclerView.Adapter<InvesotorCompletedOrderAapter.ProposalViewHolder> {
     private List<Proposal> proposals;
     private OnButtonClickListener buttonClickListener;
+    private PreferenceManager preferenceManager;
 
 
 
