@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.aswanna.Fragment.HomePageInvestorFragment;
 import com.example.aswanna.Fragment.InvestorOngoingProjectsFragment;
 import com.example.aswanna.Fragment.InvestorProfile;
+import com.example.aswanna.Massage_Main_Activity;
 import com.example.aswanna.R;
 
 public class InvestorHome extends AppCompatActivity {
@@ -26,6 +27,18 @@ public class InvestorHome extends AppCompatActivity {
         ImageView projects = findViewById(R.id.imageView12);
         ImageView bothome = findViewById(R.id.bothome45);
         ImageView menue=findViewById(R.id.imageView11);
+        ImageView chatInvestorSide=findViewById(R.id.chatInvestorSide);
+
+        chatInvestorSide.setOnClickListener(view -> {
+            // Create an Intent to start the Chat activity
+            Intent chatIntent = new Intent(InvestorHome.this, Massage_Main_Activity.class);
+
+
+            // Start the Chat activity
+            startActivity(chatIntent);
+        });
+
+
         bothome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +52,7 @@ public class InvestorHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         projects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +82,9 @@ public class InvestorHome extends AppCompatActivity {
                 replaceFragment(new InvestorProfile());
             }
         });
+
+
+
     }
     private void replaceFragment(Fragment newFragment) {
         // Get the FragmentManager

@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.aswanna.Activities.ChatActivity;
+import com.example.aswanna.Activities.InvestorPostView;
 import com.example.aswanna.Activities.ProposalAdd;
+import com.example.aswanna.Farmer_Home_Page;
 import com.example.aswanna.R;
 
 
@@ -69,9 +72,13 @@ public class ProductAddFive extends Fragment {
 
 
 
-                imageView4.setImageDrawable(drawable4);
-                imageView3.setImageDrawable(drawable3);
-                imageView2.setImageDrawable(drawable2);
+                Intent chatIntent = new Intent(getContext(), Farmer_Home_Page.class);
+
+                // Pass the farmerid as an extra to the Chat activity
+
+
+                // Start the Chat activity
+                startActivity(chatIntent);
 
 
 

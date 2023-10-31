@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Toast;
 
+import com.example.aswanna.Activities.FarmerProposalList;
 import com.example.aswanna.Activities.Farmer_Request_View;
 import com.example.aswanna.Activities.ProposalAdd;
 import com.example.aswanna.Activities.SignInActivity;
@@ -47,7 +48,8 @@ public class Farmer_Home_Page extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Profile_View.class)));
         binding.viewReqBtn.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), Farmer_Request_View.class)));
-
+        binding.proposalIC.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), FarmerProposalList.class)));
         //add proposal
         binding.addIC.setOnClickListener(v->
                 startActivity(new Intent(getApplicationContext(), ProposalAdd.class)));
